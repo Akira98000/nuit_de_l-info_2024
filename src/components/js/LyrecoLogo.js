@@ -71,7 +71,6 @@ const LyercoLogo = () => {
         return (
             <div style={{ ...style, fontFamily: "monospace", whiteSpace: "pre" }}>
                 <canvas ref={canvasRef} width={w} height={h} style={{ display: "none" }} />
-                {asciiArt}
             </div>
         );
     }
