@@ -1,0 +1,81 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
+}
+
+#app {
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle {
+    display: flex;
+    gap: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pet-info {
+    text-align: center;
+}
+
+#pet-art {
+    font-size: 14px;
+    line-height: 1.2;
+    margin: 20px 0;
+    white-space: pre;
+    animation: bounce 0.5s infinite;
+}
+
+/* Animation for bouncing */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stats {
+    width: 100%;
+    max-width: 400px;
+}
+
+.stats div {
+    margin-bottom: 10px;
+}
+
+progress {
+    width: 100%;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+body.dark-theme #app {
+    background-color: #444;
+}

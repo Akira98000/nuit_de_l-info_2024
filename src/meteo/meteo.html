@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteogotchi</title>
+    <link rel="stylesheet" href="meteo.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Meteogotchi</h1>
+            <span id="biot-id">Biot 06400</span>
+            <div class="toggle">
+                <button id="theme-toggle">🌙</button>
+                <a href="#" id="rules-link">Rules</a>
+            </div>
+        </header>
+        <main>
+            <div class="pet-info">
+                <h2 id="pet-name">Kitty</h2>
+                <p>2 weeks old</p>
+                <pre id="pet-art"></pre> <!-- Chat ASCII ici -->
+            </div>
+            <div class="actions">
+                <button onclick="performAction('sleep')">Have a sleep</button>
+                <button onclick="performAction('comfy')">Get comfy</button>
+                <button onclick="performAction('play')">Play with the hair dryer</button>
+                <button onclick="performAction('heat')">Turn up the heater</button>
+            </div>
+            <div class="stats">
+                <div>
+                    <label>Energy:</label>
+                    <progress id="energy" value="50" max="100"></progress>
+                </div>
+                <div>
+                    <label>Mood:</label>
+                    <progress id="mood" value="70" max="100"></progress>
+                </div>
+                <div>
+                    <label>Comfort:</label>
+                    <progress id="comfort" value="30" max="100"></progress>
+                </div>
+                <div>
+                    <label>Temperature:</label>
+                    <progress id="temperature" value="45" max="100"></progress>
+                </div>
+            </div>
+            <div class="weather">
+                <h3>Coming Next</h3>
+                <div class="forecast">
+                    <div class="now">
+                        <p>Now</p>
+                        <p>Min Temp: 13°C</p>
+                        <p>Max Temp: 18°C</p>
+                    </div>
+                    <div class="future">
+                        <p>In one hour</p>
+                        <p>Min Temp: 8°C</p>
+                        <p>Max Temp: 20°C</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="meteo.js"></script>
+</body>
+</html>
