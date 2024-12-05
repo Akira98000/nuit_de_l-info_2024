@@ -1,10 +1,11 @@
 import React from 'react';
+import LyercoLogo from './LyrecoLogo';
 
 const Home = () => {
     return (
-        <div>
+        <><div>
             <h1>Welcome to the Home Page</h1>
-        </div>
+        </div><LyercoLogo /></>
     );
 };
 
