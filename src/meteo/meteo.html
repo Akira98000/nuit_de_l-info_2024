@@ -32,21 +32,25 @@
                 <button onclick="performAction('heat')">Turn up the heater</button>
             </div>
             <div class="stats">
-                <div>
-                    <label>Energy:</label>
-                    <progress id="energy" value="50" max="100"></progress>
+                <div class="stat">
+                    <label>Sleep:</label>
+                    <progress id="sleep" value="50" max="100"></progress>
+                    <span id="sleep-icon">-</span>
                 </div>
-                <div>
+                <div class="stat">
                     <label>Mood:</label>
                     <progress id="mood" value="70" max="100"></progress>
+                    <span id="mood-icon">-</span>
                 </div>
-                <div>
-                    <label>Comfort:</label>
-                    <progress id="comfort" value="30" max="100"></progress>
+                <div class="stat">
+                    <label>Dryness:</label>
+                    <progress id="dryness" value="30" max="100"></progress>
+                    <span id="dryness-icon">-</span>
                 </div>
-                <div>
+                <div class="stat">
                     <label>Temperature:</label>
                     <progress id="temperature" value="45" max="100"></progress>
+                    <span id="temperature-icon">-</span>
                 </div>
             </div>
             <div class="weather">
@@ -56,26 +60,36 @@
                         <p>In 1 hour</p>
                         <p>Temp: <span id="temp-1"></span>°C</p>
                         <p>Condition: <span id="condition-1"></span></p>
+                        <p>Bonus: <span id="bonus-1"></span></p>
+                        <p>Malus: <span id="malus-1"></span></p>
                     </div>
                     <div class="hour" id="hour-2">
                         <p>In 2 hours</p>
                         <p>Temp: <span id="temp-2"></span>°C</p>
                         <p>Condition: <span id="condition-2"></span></p>
+                        <p>Bonus: <span id="bonus-2"></span></p>
+                        <p>Malus: <span id="malus-2"></span></p>
                     </div>
                     <div class="hour" id="hour-3">
                         <p>In 3 hours</p>
                         <p>Temp: <span id="temp-3"></span>°C</p>
                         <p>Condition: <span id="condition-3"></span></p>
+                        <p>Bonus: <span id="bonus-3"></span></p>
+                        <p>Malus: <span id="malus-3"></span></p>
                     </div>
                     <div class="hour" id="hour-4">
                         <p>In 4 hours</p>
                         <p>Temp: <span id="temp-4"></span>°C</p>
                         <p>Condition: <span id="condition-4"></span></p>
+                        <p>Bonus: <span id="bonus-4"></span></p>
+                        <p>Malus: <span id="malus-4"></span></p>
                     </div>
                     <div class="hour" id="hour-5">
                         <p>In 5 hours</p>
                         <p>Temp: <span id="temp-5"></span>°C</p>
                         <p>Condition: <span id="condition-5"></span></p>
+                        <p>Bonus: <span id="bonus-5"></span></p>
+                        <p>Malus: <span id="malus-5"></span></p>
                     </div>
                 </div>
             </div>

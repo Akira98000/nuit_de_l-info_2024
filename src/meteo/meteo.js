@@ -8,10 +8,10 @@ function toggleTheme() {
 function performAction(action) {
     switch (action) {
         case 'sleep':
-            updateStat('energy', 20);
+            updateStat('sleep', 20);
             break;
         case 'comfy':
-            updateStat('comfort', 15);
+            updateStat('dryness', 15);
             break;
         case 'play':
             updateStat('mood', 25);
@@ -26,8 +26,19 @@ function performAction(action) {
 
 function updateStat(stat, value) {
     const progressBar = document.getElementById(stat);
+    const icon = document.getElementById(`${stat}-icon`);
     const currentValue = parseInt(progressBar.value, 10);
-    progressBar.value = Math.min(100, currentValue + value);
+    const newValue = Math.min(100, currentValue + value);
+
+    progressBar.value = newValue;
+
+    if (value > 0) {
+        icon.textContent = '⬆️';
+    } else if (value < 0) {
+        icon.textContent = '⬇️';
+    } else {
+        icon.textContent = '➖';
+    }
 }
 
 let toggleState = 0; // 0 for the first cat, 1 for the second cat
@@ -44,7 +55,7 @@ function toggleCatArt() {
 ⠀⠀⣰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣤⣤⣤⣤⣤⣿⢿⣄⠀⠀⠀⠀
 ⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⠀⠀⠀⠀⠀⠀⠙⣷⡴⠶⣦
 ⠀⠀⢱⡀⠀⠉⠉⠀⠀⠀⠀⠛⠃⠀⢠⡟⠀⠀⠀⢀⣀⣠⣤⠿⠞⠛⠋
-⣠⠾⠋⠙⣶⣤⣤⣤⣤⣤⣀⣠⣤⣾⣿⠴⠶⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀
+⣠⠾⠋⠙⣶⣤⣤⣤⣤⣤⣤⣀⣠⣤⣾⣿⠴⠶⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀
 ⠛⠒⠛⠉⠉⠀⠀⠀⣴⠟⢃⡴⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
         `;
@@ -126,6 +137,29 @@ function mapWeatherToCategory(weatherText) {
     }
 }
 
+function getBonusMalusIcons(category) {
+    switch (category) {
+        case 'rain':
+            return { bonus: '🌙 Sleep', malus: '💧 Dryness' };
+        case 'thunder':
+            return { bonus: '😊 Mood', malus: '🌙 Sleep' };
+        case 'snowing':
+            return { bonus: '🌙 Sleep', malus: '🌡️ Temperature' };
+        case 'sunny':
+            return { bonus: '😊 Mood', malus: '🌙 Sleep' };
+        case 'cloudy':
+            return { bonus: '💧 Dryness', malus: '😊 Mood' };
+        case 'snowstorm':
+            return { bonus: '🌙 Sleep', malus: '🌡️ Temperature' };
+        case 'mist':
+            return { bonus: '💧 Dryness', malus: '😊 Mood' };
+        case 'alert':
+            return { bonus: '🌡️ Temperature', malus: '😊 Mood' };
+        default:
+            return { bonus: '❓ Unknown', malus: '❓ Unknown' };
+    }
+}
+
 async function updateWeatherStats() {
   try {
     const ip = await getIPAddress();
@@ -145,21 +179,39 @@ async function updateWeatherStats() {
 
     switch (weatherCategory) {
         case 'rain':
-        case 'snowing':
-        case 'snowstorm':
-        case 'mist':
-            updateStat('comfort', -10);
-            break;
-        case 'sunny':
-        case 'cloudy':
-            updateStat('comfort', 10);
+            updateStat('sleep', 10);
+            updateStat('dryness', -10);
             break;
         case 'thunder':
+            updateStat('mood', 10);
+            updateStat('sleep', -10);
+            break;
+        case 'snowing':
+            updateStat('sleep', 10);
+            updateStat('temperature', -10);
+            break;
+        case 'sunny':
+            updateStat('mood', 10);
+            updateStat('sleep', -10);
+            break;
+        case 'cloudy':
+            updateStat('dryness', 10);
+            updateStat('mood', -10);
+            break;
+        case 'snowstorm':
+            updateStat('sleep', 10);
+            updateStat('temperature', -10);
+            break;
+        case 'mist':
+            updateStat('dryness', 10);
+            updateStat('mood', -10);
+            break;
         case 'alert':
-            updateStat('comfort', -20);
+            updateStat('temperature', 10);
+            updateStat('mood', -10);
             break;
         default:
-            updateStat('comfort', 0);
+            updateStat('dryness', 0);
             break;
     }
 
@@ -169,12 +221,57 @@ async function updateWeatherStats() {
     for (let i = 1; i <= 5; i++) {
         const hourlyWeatherText = forecast[i - 1].IconPhrase;
         const hourlyWeatherCategory = mapWeatherToCategory(hourlyWeatherText);
+        const { bonus, malus } = getBonusMalusIcons(hourlyWeatherCategory);
         document.getElementById(`temp-${i}`).textContent = forecast[i - 1].Temperature.Value;
         document.getElementById(`condition-${i}`).textContent = hourlyWeatherCategory;
+        document.getElementById(`bonus-${i}`).textContent = bonus;
+        document.getElementById(`malus-${i}`).textContent = malus;
     }
   } catch (error) {
     console.error('Error updating weather stats:', error);
   }
+}
+
+function applyCurrentForecastEffects() {
+    const currentWeatherText = document.getElementById('condition-1').textContent;
+    const currentWeatherCategory = mapWeatherToCategory(currentWeatherText);
+
+    switch (currentWeatherCategory) {
+        case 'rain':
+            updateStat('sleep', 1);
+            updateStat('dryness', -1);
+            break;
+        case 'thunder':
+            updateStat('mood', 1);
+            updateStat('sleep', -1);
+            break;
+        case 'snowing':
+            updateStat('sleep', 1);
+            updateStat('temperature', -1);
+            break;
+        case 'sunny':
+            updateStat('mood', 1);
+            updateStat('sleep', -1);
+            break;
+        case 'cloudy':
+            updateStat('dryness', 1);
+            updateStat('mood', -1);
+            break;
+        case 'snowstorm':
+            updateStat('sleep', 1);
+            updateStat('temperature', -1);
+            break;
+        case 'mist':
+            updateStat('dryness', 1);
+            updateStat('mood', -1);
+            break;
+        case 'alert':
+            updateStat('temperature', 1);
+            updateStat('mood', -1);
+            break;
+        default:
+            break;
+    }
 }
 
 // Appel de la fonction updateWeatherStats toutes les 12 heures
@@ -182,3 +279,6 @@ setInterval(updateWeatherStats, 12 * 60 * 60 * 1000);
 
 // Appel initial pour mettre à jour les statistiques dès le chargement de la page
 updateWeatherStats();
+
+// Appliquer les effets du forecast actuel toutes les 5 secondes
+setInterval(applyCurrentForecastEffects, 5000);
