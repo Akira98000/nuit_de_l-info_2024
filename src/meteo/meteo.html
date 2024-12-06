@@ -9,10 +9,13 @@
 <body>
     <div id="app">
         <header>
-            <h1>Meteogotchi</h1>
-            <span id="biot-id">Biot 06400</span>
+            <div class="title">
+                <h1>Meteogotchi</h1>
+                <span id="biot-id">Biot 06400</span>
+            </div>
             <div class="toggle">
                 <button id="theme-toggle">🌙</button>
+                <a href="#" id="credits-link">Credits</a>
                 <a href="#" id="rules-link">Rules</a>
             </div>
         </header>
@@ -49,15 +52,30 @@
             <div class="weather">
                 <h3>Coming Next</h3>
                 <div class="forecast">
-                    <div class="now">
-                        <p>Now</p>
-                        <p>Min Temp: 13°C</p>
-                        <p>Max Temp: 18°C</p>
+                    <div class="hour" id="hour-1">
+                        <p>In 1 hour</p>
+                        <p>Temp: <span id="temp-1"></span>°C</p>
+                        <p>Condition: <span id="condition-1"></span></p>
                     </div>
-                    <div class="future">
-                        <p>In one hour</p>
-                        <p>Min Temp: 8°C</p>
-                        <p>Max Temp: 20°C</p>
+                    <div class="hour" id="hour-2">
+                        <p>In 2 hours</p>
+                        <p>Temp: <span id="temp-2"></span>°C</p>
+                        <p>Condition: <span id="condition-2"></span></p>
+                    </div>
+                    <div class="hour" id="hour-3">
+                        <p>In 3 hours</p>
+                        <p>Temp: <span id="temp-3"></span>°C</p>
+                        <p>Condition: <span id="condition-3"></span></p>
+                    </div>
+                    <div class="hour" id="hour-4">
+                        <p>In 4 hours</p>
+                        <p>Temp: <span id="temp-4"></span>°C</p>
+                        <p>Condition: <span id="condition-4"></span></p>
+                    </div>
+                    <div class="hour" id="hour-5">
+                        <p>In 5 hours</p>
+                        <p>Temp: <span id="temp-5"></span>°C</p>
+                        <p>Condition: <span id="condition-5"></span></p>
                     </div>
                 </div>
             </div>
