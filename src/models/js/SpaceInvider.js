@@ -43,7 +43,9 @@ class Player {
 
     draw() {
         this.ctx.fillStyle = 'green';
-        this.ctx.fillRect(this.x, this.y, this.size, this.size);
+        const background = new Image();
+        background.src = 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGQyMC0wMjAwMDY5LXJheS5qcGc.jpg';
+        this.ctx.drawImage(background, this.x, this.y, this.size + 50, this.size + 25);
     }
 
     move(direction) {
@@ -71,7 +73,9 @@ class Player {
     drawBullets() {
         this.bullets = this.bullets.filter(bullet => {
             this.ctx.fillStyle = 'red';
-            this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            const background = new Image();
+            background.src = 'https://png.pngtree.com/png-vector/20240130/ourmid/pngtree-a-realistic-high-quality-water-bubbles-isolated-png-image_11574242.png';
+            this.ctx.drawImage(background, bullet.x, bullet.y, 10, 10);
             bullet.y -= bullet.speed;
             return bullet.y + bullet.height > 0; // Keep bullets within canvas
         });
@@ -83,7 +87,7 @@ class Game {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.invaders = [];
-        this.player = new Player(this.ctx, canvas.width / 2 - 20, canvas.height - 30, 20);
+        this.player = new Player(this.ctx, canvas.width / 2 - 20, canvas.height - 60, 20);
         this.spawnInvaders(5, 10, 30, 35);
         this.isGameRunning = true;
 
